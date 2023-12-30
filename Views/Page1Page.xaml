@@ -5,6 +5,8 @@
              xmlns:sflv="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
 		     xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
              xmlns:display="clr-namespace:sflistviewimageissue.ViewModels.ItemDisplay"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Compat.Maui"
+             xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
 			 x:Class="sflistviewimageissue.Views.Page1Page"
 			 x:DataType="vm:Page1ViewModel">
 
@@ -28,7 +30,7 @@
                         <Grid Grid.Column="1" 
                               ColumnDefinitions="Auto,Auto,*,Auto" 
                               VerticalOptions="CenterAndExpand">
-                            <Image Grid.Column="0"
+                            <svg:SvgCachedImage Grid.Column="0"
                                Source="{Binding AccountImage}"
                                Margin="8"
                                WidthRequest="40" 

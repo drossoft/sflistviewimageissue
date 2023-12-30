@@ -1,4 +1,5 @@
-﻿using sflistviewimageissue.Converters;
+﻿using FFImageLoading.Maui;
+using sflistviewimageissue.Converters;
 using sflistviewimageissue.Repository;
 using sflistviewimageissue.Services;
 using Syncfusion.Maui.Core.Hosting;
@@ -14,6 +15,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
 			.ConfigureSyncfusionCore()
+            .UseFFImageLoading()
             .UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
