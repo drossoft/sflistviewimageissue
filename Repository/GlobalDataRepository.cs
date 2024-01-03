@@ -1,4 +1,5 @@
-﻿using sflistviewimageissue.Converters;
+﻿using sflistviewimageissue.Contracts.Enums;
+using sflistviewimageissue.Converters;
 using sflistviewimageissue.Model;
 using sflistviewimageissue.Services;
 using sflistviewimageissue.ViewModels.ItemDisplay;
@@ -44,11 +45,21 @@ namespace sflistviewimageissue.Repository
 
         public AccountBalanceDisplay GetAccountBalanceDisplay(AccountItem accountItem)
         {
+            Random random = new Random();
+
             AccountBalanceDisplay accountBalanceDisplay = new AccountBalanceDisplay();
 
             accountBalanceDisplay.AccountName = accountItem.Name;
             accountBalanceDisplay.AccountImage = (ImageSource)_imageConverter.Convert(accountItem.ImageIndex, typeof(int), null, System.Globalization.CultureInfo.CurrentCulture);
             accountBalanceDisplay.ImageNumber = accountItem.ImageIndex.ToString();
+            accountBalanceDisplay.AccountType = (AccountType)random.Next(4);
+            accountBalanceDisplay.CurrentBalance = random.NextDouble() * 10000;
+            accountBalanceDisplay.ForecastBalance = random.NextDouble() * 10000;
+            accountBalanceDisplay.AvailableBalance = random.NextDouble() * 10000;
+            accountBalanceDisplay.IsAnyForecastOrCard = random.Next(2) == 0 ? false : true;
+            accountBalanceDisplay.IsBalanceNotSynced = random.Next(2) == 0 ? false : true;
+            accountBalanceDisplay.IsAnyNotEnough = random.Next(2) == 0 ? false : true;
+            accountBalanceDisplay.IsAnyOverdue = random.Next(2) == 0 ? false : true;
 
             return accountBalanceDisplay;
         }

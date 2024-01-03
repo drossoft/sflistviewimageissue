@@ -6,7 +6,37 @@
 
 	<!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-	<Color x:Key="Primary">#512BD4</Color>
+
+    <Color x:Key="SyncColor_Light">#fcc900</Color>
+    <Color x:Key="SyncColor_Dark">#efdd66</Color>
+    <Color x:Key="OverdueColor_Light">#ffff1111</Color>
+    <Color x:Key="OverdueColor_Dark">#ffff0000</Color>
+    <Color x:Key="ShortfallColor_Light">#ffff8811</Color>
+    <Color x:Key="ShortfallColor_Dark">#ffff7522</Color>
+    <Color x:Key="NormalTextColor_Light">#000000</Color>
+    <Color x:Key="NormalTextColor_Dark">#ffffff</Color>
+    <Color x:Key="InfoTextColor_Light">#444444</Color>
+    <Color x:Key="InfoTextColor_Dark">#777777</Color>
+
+    <!-- Balance colors -->
+    <Color x:Key="PositiveBalanceColor_Light">#ff006600</Color>
+    <Color x:Key="PositiveBalanceColor_Dark">#ff8af597</Color>
+    <Color x:Key="NegativeBalanceColor_Light">#ffd40000</Color>
+    <Color x:Key="NegativeBalanceColor_Dark">#ffff2626</Color>
+    <Color x:Key="ZeroBalanceColor_Light">#ff000000</Color>
+    <Color x:Key="ZeroBalanceColor_Dark">#ffffffff</Color>
+
+    <Color x:Key="IncomeColor_Light">#ff00a401</Color>
+    <Color x:Key="IncomeColor_Dark">#ff00a401</Color>
+    <Color x:Key="ExpenseColor_Light">#ff336cff</Color>
+    <Color x:Key="ExpenseColor_Dark">#ff336cff</Color>
+    <Color x:Key="TransferColor_Light">#ff777777</Color>
+    <Color x:Key="TransferColor_Dark">#ff555555</Color>
+    <Color x:Key="LoanColor_Light">#fff39e26</Color>
+    <Color x:Key="LoanColor_Dark">#fff39e26</Color>
+
+
+    <Color x:Key="Primary">#512BD4</Color>
 	<Color x:Key="PrimaryDark">#ac99ea</Color>
 	<Color x:Key="PrimaryDarkText">#242424</Color>
 	<Color x:Key="Secondary">#DFD8F7</Color>

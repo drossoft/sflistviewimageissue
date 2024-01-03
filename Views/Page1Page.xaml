@@ -5,65 +5,44 @@
              xmlns:sflv="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
 		     xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
              xmlns:display="clr-namespace:sflistviewimageissue.ViewModels.ItemDisplay"
+             xmlns:li="clr-namespace:sflistviewimageissue.Views.ListItem"
              xmlns:FFImage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Compat.Maui"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
 			 x:Class="sflistviewimageissue.Views.Page1Page"
 			 x:DataType="vm:Page1ViewModel">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="AccountItemTemplate"
-                      x:DataType="display:AccountBalanceDisplay">
-            <Grid>
-                <Border Style="{StaticResource ListBorderStyle}" Margin="2,1">
-                    <Grid Padding="0"
-                          ColumnDefinitions="Auto,*,Auto"
-                          RowDefinitions="Auto,Auto">
-                        <!-- Indicators -->
-                        <HorizontalStackLayout Grid.Column="0"
-                                               Spacing="0"
-                                               Grid.RowSpan="2">
-                            <BoxView Color="Yellow" WidthRequest="10" Margin="0"/>
-                            <BoxView Color="Red" WidthRequest="10" Margin="0"/>
-                        </HorizontalStackLayout>
-                        
-                        <!-- Account -->
-                        <Grid Grid.Column="1" 
-                              ColumnDefinitions="Auto,Auto,*,Auto" 
-                              VerticalOptions="CenterAndExpand">
-                            <svg:SvgCachedImage Grid.Column="0"
-                               Source="{Binding AccountImage}"
-                               Margin="8"
-                               WidthRequest="40" 
-                               HeightRequest="40"
-                               VerticalOptions="Center"/>
-                            <Label  Grid.Column="1"
-                                    Margin="4,8"
-                                    Text="{Binding ImageNumber}"
-                                    VerticalOptions="Center"
-                                    TextColor="White"
-                                    LineBreakMode="WordWrap"/>
-                            <Label  Grid.Column="2"
-                                    Margin="4,8"
-                                    Text="{Binding AccountName}"
-                                    VerticalOptions="Center"
-                                    TextColor="White"
-                                    LineBreakMode="WordWrap"/>
-                        </Grid>
 
-                        <!-- Balance -->
-                        
-                    </Grid>
-                </Border>
-            </Grid>
+        <DataTemplate x:Key="AccountItemTemplate">
+            <li:AccountBalanceItem/>
         </DataTemplate>
+        
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*">
 
         <sflv:SfListView Grid.Row="1" 
                          AutoFitMode="DynamicHeight"
+                         SelectionMode="None"
                          ItemsSource="{Binding AccountBalances}"
-                         ItemTemplate="{StaticResource AccountItemTemplate}"/>
+                         ItemTemplate="{StaticResource AccountItemTemplate}">
+            <sflv:SfListView.DataSource>
+                <data:DataSource>
+                    <data:DataSource.GroupDescriptors>
+                        <data:GroupDescriptor PropertyName="AccountType"/>
+                    </data:DataSource.GroupDescriptors>
+                </data:DataSource>
+            </sflv:SfListView.DataSource>
+            <sflv:SfListView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="{x:Null}">
+                    <Grid RowDefinitions="Auto,Auto" Padding="2" Margin="2">
+                        <Label Grid.Row="0" Text="{Binding Key, Converter={StaticResource EnumConverter}}"  VerticalOptions="End"
+        Style="{StaticResource NormalLabelStyle}"/>
+                        <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Gray"/>
+                    </Grid>
+                </DataTemplate>
+            </sflv:SfListView.GroupHeaderTemplate>
+        </sflv:SfListView>
 
     </Grid>
     

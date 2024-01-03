@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:display="clr-namespace:sflistviewimageissue.ViewModels.ItemDisplay"
+             xmlns:cc="clr-namespace:sflistviewimageissue.CustomControls"
+             xmlns:enum="clr-namespace:sflistviewimageissue.Contracts.Enums"
+             x:Class="sflistviewimageissue.Views.ListItem.AccountBalanceItem"
+             x:DataType="display:AccountBalanceDisplay">
+
+    <Grid Padding="0,2" Margin="{OnPlatform MacCatalyst='0,0,8,0', Default=0}"  MinimumHeightRequest="70" >
+        <Grid.Triggers>
+            <DataTrigger TargetType="Grid" Binding="{Binding HasUpcoming}" Value="True">
+                <Setter Property="MinimumHeightRequest" Value="90"/>
+            </DataTrigger>
+            <DataTrigger TargetType="Grid" Binding="{Binding AccountType}" Value="{x:Static enum:AccountType.CreditCard}">
+                <Setter Property="MinimumHeightRequest" Value="90"/>
+            </DataTrigger>
+
+        </Grid.Triggers>
+        <Border Style="{StaticResource ListBorderStyle}"
+                x:Name="ParentElement">
+            <Grid Padding="0"
+                  ColumnDefinitions="Auto,*,Auto"
+                  RowDefinitions="Auto,Auto"
+                  >
+                <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0" Grid.RowSpan="2"
+                             HeightRequest="{Binding Path=Height, Source={x:Reference Name=ParentElement}}">
+                    <BoxView Color="{AppThemeBinding Dark={StaticResource SyncColor_Dark}, Light={StaticResource SyncColor_Light}}" IsVisible="{Binding IsBalanceNotSynced}" WidthRequest="10" Margin="0"/>
+                    <BoxView Color="{AppThemeBinding Dark={StaticResource ShortfallColor_Dark}, Light={StaticResource ShortfallColor_Light}}" IsVisible="{Binding IsAnyNotEnough}" WidthRequest="10" Margin="0"/>
+                    <BoxView Color="{AppThemeBinding Dark={StaticResource OverdueColor_Dark}, Light={StaticResource OverdueColor_Light}}" IsVisible="{Binding IsAnyOverdue}" WidthRequest="10" Margin="0"/>
+                </StackLayout>
+
+                <Grid Grid.Column="1" ColumnDefinitions="Auto,*,Auto" VerticalOptions="CenterAndExpand">
+                    <cc:CustomImage Grid.Column="0"
+                                               Source="{Binding AccountImage}"
+                                               Margin="8"
+                                               WidthRequest="40" 
+                                               HeightRequest="40"
+                                               VerticalOptions="Center"/>
+                    <Label  Grid.Column="1"
+                                               Margin="4,8"
+                                               Text="{Binding AccountName}"
+                                               Style="{StaticResource NormalLabelStyle}"
+                                               LineBreakMode="WordWrap"/>
+                </Grid>
+
+                <VerticalStackLayout Grid.Column="2" 
+                                     Grid.RowSpan="2"
+                                     Spacing="0" VerticalOptions="CenterAndExpand" Margin="0,0,4,0">
+                    <Label Text="{Binding CurrentBalance, Converter={StaticResource CurrencyConverter}}" 
+                                               TextColor="{Binding CurrentBalance, Converter={StaticResource BalanceToColorConverter}}" 
+                                                        Margin="4,2" 
+                                                        VerticalOptions="Start" HorizontalOptions="End"
+                                                        Style="{StaticResource AmountLabelStyle}"/>
+
+
+                    <Label Text="{Binding ForecastBalance, Converter={StaticResource CurrencyConverter}}"
+                                               TextColor="{Binding ForecastBalance, Converter={StaticResource ForecastBalanceToColorConverter}}" 
+                                                        Margin="4,2" 
+                                                        VerticalOptions="Start" HorizontalOptions="End" 
+                                                        Style="{StaticResource AmountLabelStyle}"
+                                                        FontSize="{StaticResource SmallFontSize}"
+                                                        IsVisible="{Binding IsAnyForecastOrCard}"/>
+
+                    <StackLayout Orientation="Horizontal" IsVisible="False" HorizontalOptions="End">
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding AccountType}" Value="{x:Static enum:AccountType.CreditCard}">
+                                <Setter Property="IsVisible" Value="True"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+                        <Label Text="Available" 
+                                                            Margin="4,2"  
+                                                            VerticalOptions="Start" Style="{StaticResource InfoLabelStyle}"
+                                                           FontSize="{StaticResource SmallFontSize}"/>
+                        <Label Text="{Binding AvailableBalance, Converter={StaticResource CurrencyConverter}}" 
+                                                            Margin="4,2" TextColor="{Binding AvailableBalance, Converter={StaticResource BalanceToColorConverter}}" 
+                                                            VerticalOptions="Start" Style="{StaticResource InfoLabelStyle}"
+                                                            FontSize="{StaticResource SmallFontSize}"/>
+                    </StackLayout>
+                </VerticalStackLayout>
+
+
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                                       Margin="0,0,4,4"
+                                       IsVisible="{Binding HasUpcoming}" HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="CenterAndExpand">
+                    <BoxView Color="{Binding UpcomingTransactionType, Converter={StaticResource TransactionTypeToColorConverter}}" 
+                             Margin="8,0,0,0"
+                             WidthRequest="4" CornerRadius="2"/>
+                    <Label Text="{Binding InitialUpcomingText}" Style="{StaticResource SmallInfoLabelStyle}" 
+                           VerticalOptions="Center" Margin="0,2,4,2"
+                           TextColor="{AppThemeBinding Dark={StaticResource InfoTextColor_Dark}, Light={StaticResource InfoTextColor_Light}}"/>
+                    <cc:CustomImage Source="{Binding UpcomingImage}" Style="{StaticResource SmallAccountImageStyle}" />
+                    <Label Text="{Binding FinalUpcomingText}" Style="{StaticResource SmallLabelStyle}" VerticalOptions="Center" Margin="4,2" LineBreakMode="TailTruncation"
+                           TextColor="{AppThemeBinding Dark={StaticResource InfoTextColor_Dark}, Light={StaticResource InfoTextColor_Light}}"/>
+                </HorizontalStackLayout>
+
+            </Grid>
+        </Border>
+    </Grid>
+</ContentView>

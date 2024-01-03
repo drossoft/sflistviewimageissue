@@ -2,11 +2,23 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:local="clr-namespace:sflistviewimageissue"
+             xmlns:cnv="clr-namespace:sflistviewimageissue.Converters"
 			 x:Class="sflistviewimageissue.App">
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+
+                <ResourceDictionary>
+                    <cnv:EnumConverter x:Key="EnumConverter"/>
+                    <cnv:TransactionTypeToColorConverter x:Key="TransactionTypeToColorConverter"/>
+                    <cnv:CurrencyConverter x:Key="CurrencyConverter"/>
+                    <cnv:BalanceToColorConverter x:Key="BalanceToColorConverter"/>
+                    <cnv:ForecastBalanceToColorConverter x:Key="ForecastBalanceToColorConverter"/>
+                    <cnv:AccountImageIndexToImageSourceConverter x:Key="AccountImageIndexToImageSourceConverter"/>
+
+                </ResourceDictionary>
+
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
 				<ResourceDictionary Source="Resources/Styles/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
