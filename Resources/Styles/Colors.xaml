@@ -18,6 +18,16 @@
     <Color x:Key="InfoTextColor_Light">#444444</Color>
     <Color x:Key="InfoTextColor_Dark">#777777</Color>
 
+    <Color x:Key="FlexButtonColor_Light">#e1edee</Color>
+    <Color x:Key="FlexButtonColor_Dark">#031824</Color>
+
+    <Color x:Key="FlexBorderColor_Dark">#233c4f</Color>
+    <Color x:Key="FlexBorderColor_Light">#a3bcbf</Color>
+
+    <!-- Highlight -->
+    <Color x:Key="HighlightColor_Light">#ffbff2f5</Color>
+    <Color x:Key="HighlightColor_Dark">#ff047b92</Color>
+
     <!-- Balance colors -->
     <Color x:Key="PositiveBalanceColor_Light">#ff006600</Color>
     <Color x:Key="PositiveBalanceColor_Dark">#ff8af597</Color>

@@ -32,6 +32,14 @@
         <On Platform="MacCatalyst" Value="16"/>
     </OnPlatform>
 
+    <Style x:Key="FlexBorderStyle" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource FlexButtonColor_Dark}, Light={StaticResource FlexButtonColor_Light}}"/>
+        <Setter Property="Stroke" Value="{AppThemeBinding Dark={StaticResource FlexBorderColor_Dark }, Light={StaticResource FlexBorderColor_Light}}"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 8"/>
+    </Style>
+
 
     <Style x:Key="NormalLabelStyle" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource NormalFontSize}" />

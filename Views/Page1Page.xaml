@@ -6,6 +6,7 @@
 		     xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource"
              xmlns:display="clr-namespace:sflistviewimageissue.ViewModels.ItemDisplay"
              xmlns:li="clr-namespace:sflistviewimageissue.Views.ListItem"
+             xmlns:enum="clr-namespace:sflistviewimageissue.Contracts.Enums"
              xmlns:FFImage="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Compat.Maui"
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
 			 x:Class="sflistviewimageissue.Views.Page1Page"
@@ -19,31 +20,138 @@
         
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*">
 
-        <sflv:SfListView Grid.Row="1" 
-                         AutoFitMode="DynamicHeight"
-                         SelectionMode="None"
-                         ItemsSource="{Binding AccountBalances}"
-                         ItemTemplate="{StaticResource AccountItemTemplate}">
-            <sflv:SfListView.DataSource>
-                <data:DataSource>
-                    <data:DataSource.GroupDescriptors>
-                        <data:GroupDescriptor PropertyName="AccountType"/>
-                    </data:DataSource.GroupDescriptors>
-                </data:DataSource>
-            </sflv:SfListView.DataSource>
-            <sflv:SfListView.GroupHeaderTemplate>
-                <DataTemplate x:DataType="{x:Null}">
-                    <Grid RowDefinitions="Auto,Auto" Padding="2" Margin="2">
-                        <Label Grid.Row="0" Text="{Binding Key, Converter={StaticResource EnumConverter}}"  VerticalOptions="End"
-        Style="{StaticResource NormalLabelStyle}"/>
-                        <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Gray"/>
-                    </Grid>
-                </DataTemplate>
-            </sflv:SfListView.GroupHeaderTemplate>
-        </sflv:SfListView>
+    <Grid RowDefinitions="Auto,Auto,*"
+          Padding="0"
+          x:Name="MainGrid">
 
+        <Label Grid.Row="0" Text="Title"/>
+
+        <!-- Buttons -->
+        <FlexLayout Grid.Row="1" Direction="Row" Wrap="Wrap"  AlignItems="Start"  JustifyContent="Start" AlignContent="Start"
+                Margin="4,8,4,4">
+            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8" Margin="2,0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToSettingsCommand}"/>
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Settings}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <HorizontalStackLayout Spacing="10">
+                    <svg:SvgCachedImage Source="apple.png" 
+                                   WidthRequest="30" HeightRequest="30" Margin="0"/>
+                    <Label Text="Settings" Style="{StaticResource ButtonLabelStyle}"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8" Margin="2,0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToAccountsCommand}"/>
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Accounts}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <HorizontalStackLayout Spacing="10">
+                    <svg:SvgCachedImage Source="account.png" 
+                                   WidthRequest="30" HeightRequest="30" Margin="0"/>
+                    <Label Text="Accounts" Style="{StaticResource ButtonLabelStyle}"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8" Margin="2,0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToCategoriesCommand}"/>
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Categories}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <HorizontalStackLayout Spacing="10">
+                    <svg:SvgCachedImage Source="account.png" 
+               WidthRequest="30" HeightRequest="30" Margin="0"/>
+                    <Label Text="Tab 3" Style="{StaticResource ButtonLabelStyle}"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8" Margin="2,0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToChartsCommand}"/>
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Charts}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <HorizontalStackLayout Spacing="10">
+                    <svg:SvgCachedImage Source="account.png" 
+               WidthRequest="30" HeightRequest="30" Margin="0"/>
+                    <Label Text="Tab 4" Style="{StaticResource ButtonLabelStyle}"/>
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8"  Margin="2,0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToDataCommand}"/>
+                </Border.GestureRecognizers>
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Data}">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
+                    </DataTrigger>
+                </Border.Triggers>
+                <HorizontalStackLayout Spacing="10">
+                    <svg:SvgCachedImage Source="account.png" 
+               WidthRequest="30" HeightRequest="30" Margin="0"/>
+                    <Label Text="Tab 5" Style="{StaticResource ButtonLabelStyle}"/>
+                </HorizontalStackLayout>
+            </Border>
+        </FlexLayout>
+
+        <!-- Settings -->
+        <Grid Grid.Row="2" IsVisible="False">
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Settings}">
+                    <Setter Property="IsVisible" Value="True"/>
+                </DataTrigger>
+            </Grid.Triggers>
+            <Label Text="Settings page, press accounts button" Style="{StaticResource NormalLabelStyle}"/>
+        </Grid>
+
+        <!-- Accounts -->
+        <Grid Grid.Row="2" RowDefinitions="Auto,*" IsVisible="False">
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Accounts}">
+                    <Setter Property="IsVisible" Value="True"/>
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <sflv:SfListView Grid.Row="2" 
+                 AutoFitMode="DynamicHeight"
+                 SelectionMode="None"
+                 ItemsSource="{Binding AccountBalances}"
+                 ItemTemplate="{StaticResource AccountItemTemplate}">
+                <sflv:SfListView.DataSource>
+                    <data:DataSource>
+                        <data:DataSource.GroupDescriptors>
+                            <data:GroupDescriptor PropertyName="AccountType"/>
+                        </data:DataSource.GroupDescriptors>
+                    </data:DataSource>
+                </sflv:SfListView.DataSource>
+                <sflv:SfListView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Grid RowDefinitions="Auto,Auto" Padding="2" Margin="2">
+                            <Label Grid.Row="0" Text="{Binding Key, Converter={StaticResource EnumConverter}}"  VerticalOptions="End"
+Style="{StaticResource NormalLabelStyle}"/>
+                            <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Gray"/>
+                        </Grid>
+                    </DataTemplate>
+                </sflv:SfListView.GroupHeaderTemplate>
+            </sflv:SfListView>
+        </Grid>
     </Grid>
     
 </ContentPage>
