@@ -5,4 +5,11 @@
 			 x:Class="sflistviewimageissue.Views.Page2Page"
 			 x:DataType="vm:Page2ViewModel">
 
+    <Grid RowDefinitions="Auto,*" >
+        <Label Text="Empty page" 
+               Margin="16"
+               Style="{StaticResource NormalLabelStyle}"/>
+    </Grid>
+    
+
 </ContentPage>

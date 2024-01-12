@@ -35,10 +35,12 @@ public static class MauiProgram
 		//ViewModels
         builder.Services.AddSingleton<Page1ViewModel>();
         builder.Services.AddSingleton<Page2ViewModel>();
+        builder.Services.AddSingleton<ReportsViewModel>();
 
-		//Views
+        //Views
         builder.Services.AddSingleton<Page1Page>();
 		builder.Services.AddSingleton<Page2Page>();
+        builder.Services.AddSingleton<ReportsPage>();
 
         return builder.Build();
 	}

@@ -8,11 +8,11 @@
 
 	<TabBar>
 		<ShellContent
-			Title="SfListView"
+			Title="Page 1"
 			Icon="iconblank.png"
 			ContentTemplate="{DataTemplate views:Page1Page}" />
         <ShellContent
-			Title="Blank"
+			Title="Page 2"
 			Icon="iconblank.png"
 			ContentTemplate="{DataTemplate views:Page2Page}" />
     </TabBar>

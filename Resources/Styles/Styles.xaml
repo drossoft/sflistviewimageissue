@@ -90,6 +90,16 @@
         <Setter Property="StrokeShape" Value="RoundRectangle 4"/>
     </Style>
 
+    <Style x:Key="MoreFlexBorderStyle" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource FlexButtonColor_Dark}, Light={StaticResource FlexButtonColor_Light}}"/>
+        <Setter Property="Stroke" Value="{AppThemeBinding Dark={StaticResource FlexBorderColor_Dark }, Light={StaticResource FlexBorderColor_Light}}"/>
+        <Setter Property="Margin" Value="2,4"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 8"/>
+        <Setter Property="WidthRequest" Value="{OnPlatform Android=110, Default=120}"/>
+        <Setter Property="HeightRequest" Value="100"/>
+    </Style>
+
     <Style TargetType="ActivityIndicator">
 		<Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
 	</Style>
