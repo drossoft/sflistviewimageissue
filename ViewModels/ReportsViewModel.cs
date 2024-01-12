@@ -56,4 +56,15 @@ public partial class ReportsViewModel : BaseViewModel
         CurrentPage = ReportPage.Charts;
     }
 
+    [RelayCommand]
+    async Task GoBack()
+    {
+        await DoGoBack();
+    }
+
+    protected virtual async Task DoGoBack()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
 }

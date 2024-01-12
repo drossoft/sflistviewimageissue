@@ -83,7 +83,7 @@
     </Style>
 
     <Style x:Key="ListBorderStyle" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="#121217"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource FlexButtonColor_Dark}, Light={StaticResource FlexButtonColor_Light}}"/>
         <Setter Property="Stroke" Value="#233c4f"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0,0,2,0"/>

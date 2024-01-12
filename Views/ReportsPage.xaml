@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:sflistviewimageissue.ViewModels"
@@ -11,6 +11,7 @@
              xmlns:svg="clr-namespace:FFImageLoading.Svg.Maui;assembly=FFImageLoading.Compat.Svg.Maui"
              x:Class="sflistviewimageissue.Views.ReportsPage"
              x:DataType="vm:ReportsViewModel"
+             Shell.PresentationMode="Modal"
              Title="Reports">
 
     <ContentPage.Resources>
@@ -25,7 +26,8 @@
       Padding="0"
       x:Name="MainGrid">
 
-        <Label Grid.Row="0" Margin="16" Text="Press Accounts button" Style="{StaticResource NormalLabelStyle}"/>
+        <Button Grid.Row="0" Margin="16" Text="Go Back" Style="{StaticResource NormalLabelStyle}"
+                Command="{Binding GoBackCommand}"/>
 
         <!-- Buttons -->
         <FlexLayout Grid.Row="1" Direction="Row" Wrap="Wrap"  AlignItems="Start"  JustifyContent="Start" AlignContent="Start"
@@ -40,7 +42,7 @@
                     </DataTrigger>
                 </Border.Triggers>
                 <HorizontalStackLayout Spacing="10">
-                    <svg:SvgCachedImage Source="apple.png" 
+                    <svg:SvgCachedImage Source="iconblank.png" 
                                    WidthRequest="30" HeightRequest="30" Margin="0"/>
                     <Label Text="Settings" Style="{StaticResource ButtonLabelStyle}"/>
                 </HorizontalStackLayout>
@@ -56,9 +58,9 @@
                     </DataTrigger>
                 </Border.Triggers>
                 <HorizontalStackLayout Spacing="10">
-                    <svg:SvgCachedImage Source="account.png" 
+                    <svg:SvgCachedImage Source="iconblank.png" 
                                    WidthRequest="30" HeightRequest="30" Margin="0"/>
-                    <Label Text="Accounts" Style="{StaticResource ButtonLabelStyle}"/>
+                    <Label Text="SfListView" Style="{StaticResource ButtonLabelStyle}"/>
                 </HorizontalStackLayout>
             </Border>
 
@@ -72,56 +74,40 @@
                     </DataTrigger>
                 </Border.Triggers>
                 <HorizontalStackLayout Spacing="10">
-                    <svg:SvgCachedImage Source="account.png" 
+                    <svg:SvgCachedImage Source="iconblank.png" 
                WidthRequest="30" HeightRequest="30" Margin="0"/>
-                    <Label Text="Tab 3" Style="{StaticResource ButtonLabelStyle}"/>
+                    <Label Text="CollectionView" Style="{StaticResource ButtonLabelStyle}"/>
                 </HorizontalStackLayout>
             </Border>
 
-            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8" Margin="2,0">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToChartsCommand}"/>
-                </Border.GestureRecognizers>
-                <Border.Triggers>
-                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Charts}">
-                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
-                    </DataTrigger>
-                </Border.Triggers>
-                <HorizontalStackLayout Spacing="10">
-                    <svg:SvgCachedImage Source="account.png" 
-               WidthRequest="30" HeightRequest="30" Margin="0"/>
-                    <Label Text="Tab 4" Style="{StaticResource ButtonLabelStyle}"/>
-                </HorizontalStackLayout>
-            </Border>
-
-            <Border Style="{StaticResource FlexBorderStyle}" Padding="16,8"  Margin="2,0">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToDataCommand}"/>
-                </Border.GestureRecognizers>
-                <Border.Triggers>
-                    <DataTrigger TargetType="Border" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Data}">
-                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource HighlightColor_Dark}, Light={StaticResource HighlightColor_Light}}"/>
-                    </DataTrigger>
-                </Border.Triggers>
-                <HorizontalStackLayout Spacing="10">
-                    <svg:SvgCachedImage Source="account.png" 
-               WidthRequest="30" HeightRequest="30" Margin="0"/>
-                    <Label Text="Tab 5" Style="{StaticResource ButtonLabelStyle}"/>
-                </HorizontalStackLayout>
-            </Border>
+            
         </FlexLayout>
 
         <!-- Settings -->
-        <Grid Grid.Row="2" IsVisible="False">
+        <Grid Grid.Row="2" IsVisible="False" RowDefinitions="Auto,*">
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Settings}">
                     <Setter Property="IsVisible" Value="True"/>
                 </DataTrigger>
             </Grid.Triggers>
-            <Label Text="Settings page, press accounts button" Style="{StaticResource NormalLabelStyle}"/>
+            <VerticalStackLayout>
+                <Label Text="On iOS only, when page is modal SfListView is not rendered when IsVisible of parent Grid is triggered to True."
+                   Margin="16"
+                   Style="{StaticResource NormalLabelStyle}"/>
+                <Label Text="Press SfListView button -> SfListView items not rendered."
+                   Margin="16"
+                   Style="{StaticResource NormalLabelStyle}"/>
+                <Label Text="BackgroundColor of SfListView is red to verify it is visible."
+                   Margin="16"
+                   Style="{StaticResource NormalLabelStyle}"/>
+                <Label Text="Press CollectionView button -> CollectionView is rendered"
+                   Margin="16"
+                   Style="{StaticResource NormalLabelStyle}"/>
+            </VerticalStackLayout>
+            
         </Grid>
 
-        <!-- Accounts -->
+        <!-- SfListView -->
         <Grid Grid.Row="2" RowDefinitions="Auto,*" IsVisible="False">
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Accounts}">
@@ -133,7 +119,8 @@
                  AutoFitMode="DynamicHeight"
                  SelectionMode="None"
                  ItemsSource="{Binding AccountBalances}"
-                 ItemTemplate="{StaticResource AccountItemTemplate}">
+                 ItemTemplate="{StaticResource AccountItemTemplate}"
+                 BackgroundColor="Red">
                 <sflv:SfListView.DataSource>
                     <data:DataSource>
                         <data:DataSource.GroupDescriptors>
@@ -151,6 +138,21 @@ Style="{StaticResource NormalLabelStyle}"/>
                     </DataTemplate>
                 </sflv:SfListView.GroupHeaderTemplate>
             </sflv:SfListView>
+        </Grid>
+
+        <!-- CollectionView -->
+        <Grid Grid.Row="2" RowDefinitions="Auto,*" IsVisible="False">
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding CurrentPage}" Value="{x:Static enum:ReportPage.Categories}">
+                    <Setter Property="IsVisible" Value="True"/>
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <CollectionView Grid.Row="2" 
+                 SelectionMode="None"
+                 ItemsSource="{Binding AccountBalances}"
+                 ItemTemplate="{StaticResource AccountItemTemplate}">
+            </CollectionView>
         </Grid>
 
     </Grid>
